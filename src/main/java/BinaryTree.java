@@ -6,9 +6,45 @@ public class BinaryTree {
     public static void main(String[] args) {
         TreeElement randomBinaryTree = generateRandomBinaryTree(6, 0.5, 99);
         System.out.println(randomBinaryTree.toString());
+
+        System.out.println(findInTree(5, randomBinaryTree));
+
     }
 
-    public static void preorder (TreeElement root) {
+    public static int getTreeHight(TreeElement root) {
+        if (root == null) {
+            return 0;
+
+        } else {
+            int leftTreeHeight = getTreeHight(root.getLeftElement());
+            int rightTreeHeight = getTreeHight(root.getRightElement());
+            if (leftTreeHeight > rightTreeHeight) {
+                return leftTreeHeight +1;
+
+            } else {
+                return  rightTreeHeight +1;
+            }
+
+        }
+    }
+
+    public static boolean findInTree(int searchedValue, TreeElement root) {
+        boolean founded = false;
+        if (root != null) {
+            if (searchedValue == root.getElementValue()) {
+                founded = true;
+
+            } else {
+                founded = findInTree(searchedValue, root.getLeftElement());
+                if (!founded) {
+                    founded = findInTree(searchedValue, root.getRightElement());
+                }
+            }
+        }
+        return founded;
+    }
+
+    public static void preorder(TreeElement root) {
         if (root != null) {
             System.out.println(root.getElementValue());
             preorder(root.getLeftElement());
@@ -16,7 +52,7 @@ public class BinaryTree {
         }
     }
 
-    public static void inorder (TreeElement root) {
+    public static void inorder(TreeElement root) {
         if (root != null) {
             inorder(root.getLeftElement());
             System.out.println(root.getElementValue());
@@ -24,7 +60,7 @@ public class BinaryTree {
         }
     }
 
-    public static void postorder (TreeElement root) {
+    public static void postorder(TreeElement root) {
         if (root != null) {
             postorder(root.getLeftElement());
             postorder(root.getRightElement());
@@ -35,7 +71,7 @@ public class BinaryTree {
     public static TreeElement generateRandomBinaryTree(int elementsNumber, double probability, int range) {
 
         /* Tworzymy korzeń */
-        TreeElement rootElement = new TreeElement((int)(Math.random() * range));
+        TreeElement rootElement = new TreeElement((int) (Math.random() * range));
 
         /* Tymczasowy element, którym przesuwamy się po drzewie,
         zaczynając od korzenia */
@@ -43,17 +79,17 @@ public class BinaryTree {
 
         /* For wykonujemy tyle razy ile elementów mamy dodać,
         -1 ponieważ utworzyliśmy korzeń */
-        for (int i = 0; i < elementsNumber -1; i++ ){
+        for (int i = 0; i < elementsNumber - 1; i++) {
 
             /* Tworzymy nowy element, który dodamy do drzewa */
-            TreeElement newElement = new TreeElement((int)(Math.random() * range));
+            TreeElement newElement = new TreeElement((int) (Math.random() * range));
 
             /* zmienna przechowująca informację czy został element już dodany */
             boolean newElementWasAdded = false;
 
             do {
                 /* idziemy w lewe poddrzewo */
-                if(Math.random() < probability) {
+                if (Math.random() < probability) {
                     if (jumpFrog.getLeftElement() != null) {
                         /* skaczemy na element który wskazuje lewy wskaźnik */
                         jumpFrog = jumpFrog.getLeftElement();
