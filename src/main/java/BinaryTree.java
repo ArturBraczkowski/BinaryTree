@@ -42,7 +42,7 @@ public class BinaryTree {
                 return leftTreeHeight +1;
 
             } else {
-                return  rightTreeHeight +1;
+                return  rightTreeHeight +1 ;
             }
 
         }
