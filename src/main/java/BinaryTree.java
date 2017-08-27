@@ -8,7 +8,27 @@ public class BinaryTree {
         System.out.println(randomBinaryTree.toString());
 
         System.out.println(findInTree(5, randomBinaryTree));
+        System.out.println(getTreeHight(randomBinaryTree));
 
+    }
+
+    public static TreeElement generatrBalancedTree (int elementsNumber, int range) {
+        TreeElement treeElement = new TreeElement();
+        int leftTreeSize = 0;
+        int rightTreeSize = 0;
+        if (elementsNumber > 0) {
+            leftTreeSize = elementsNumber / 2;
+            rightTreeSize = elementsNumber - leftTreeSize;
+
+            int randomValue = (int) (Math.random()*range);
+
+            treeElement.setElementValue((randomValue));
+            treeElement.setLeftElement(generatrBalancedTree(leftTreeSize, range));
+            treeElement.setRightElement(generatrBalancedTree(rightTreeSize, range));
+
+        }
+
+        return treeElement;
     }
 
     public static int getTreeHight(TreeElement root) {
