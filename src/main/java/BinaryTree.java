@@ -8,6 +8,30 @@ public class BinaryTree {
         System.out.println(randomBinaryTree.toString());
     }
 
+    public static void preorder (TreeElement root) {
+        if (root != null) {
+            System.out.println(root.getElementValue());
+            preorder(root.getLeftElement());
+            preorder(root.getRightElement());
+        }
+    }
+
+    public static void inorder (TreeElement root) {
+        if (root != null) {
+            inorder(root.getLeftElement());
+            System.out.println(root.getElementValue());
+            inorder(root.getRightElement());
+        }
+    }
+
+    public static void postorder (TreeElement root) {
+        if (root != null) {
+            postorder(root.getLeftElement());
+            postorder(root.getRightElement());
+            System.out.println(root.getElementValue());
+        }
+    }
+
     public static TreeElement generateRandomBinaryTree(int elementsNumber, double probability, int range) {
 
         /* Tworzymy korzeń */
